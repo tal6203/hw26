@@ -3,6 +3,7 @@ const assert = require('assert');
 const expect = require('chai').expect;
 const { json } = require('express');
 const axios = require('axios');
+const config = require('config');
 
 
 
@@ -84,10 +85,11 @@ describe('Testing basic functionality of the bigger_is', () => {
 });
 
 
+const port = config.express.port;
 
 
 it('bring number from DB and Two parameters from db', async () => {
-    const res = await axios.get('http://localhost:8080/getnumber');
+    const res = await axios.get(`http://localhost:${port}/getnumber`);
     const numberFromDb = res.data.numbers;
     for (let i = 0; i < numberFromDb.length - 1; i++) {
         assert.throws(() => {
